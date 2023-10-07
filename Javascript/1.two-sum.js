@@ -11,21 +11,21 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    return nums.map((n1, n1Index) => {
-        let n2Index = n1Index + 1;
-        while (n2Index < nums.length) {
-            if (n1 + nums[n2Index] > target) {
-                n2Index++;
-                continue;
-            }
+    const index = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        const subpart = target - nums[i];
+        index.set(subpart, i);
+    }
+    for (let i = 0; i < nums.length; i++) {
+        const key = index.get(nums[i]);
 
-            if (n1 + nums[n2Index] === target) {
-                return [n1Index, n2Index];
-            }
-
-            n2Index++;
+        if (i === key) {
             continue;
         }
-    }).find(ns => ns !== undefined);
+
+        if (key !== undefined) {
+            return [i, key];
+        }
+    }
 };
 // @lc code=end
