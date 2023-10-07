@@ -24,49 +24,29 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    const nodeListToArray = (nl) => {
-        const arr = [];
-        let target = nl;
-        while (true) {
-            arr.push(BigInt(target.val));
-            if (target.next !== null) {
-                target = target.next;
-                continue;
-            }
-            break;
+    let dummy = new ListNode(0);
+    let currentNode = dummy;
+    let carry = 0;
+
+    while (l1 !== null || l2 !== null || carry !== 0) {
+        const x = l1 !== null ? l1.val : 0;
+        const y = l2 !== null ? l2.val : 0;
+        const sum = x + y + carry;
+        carry = sum >= 10 ? 1 : 0;
+        currentNode.next = new ListNode(sum % 10);
+        currentNode = currentNode.next;
+
+        if (l1 !== null) {
+            l1 = l1.next;
         }
-        return arr;
+        if (l2 !== null) {
+            l2 = l2.next;
+        }
     }
 
-    const l1Arr = nodeListToArray(l1);
-    const l2Arr = nodeListToArray(l2);
-    const getReverseNum = (l) => {
-        return l.reverse().reduce((p,c,ci) => {
-            return p + (c * (BigInt(10) ** BigInt(l.length - ci - 1)));
-        }, BigInt(0));
-    };
-
-    const num1 = getReverseNum(l1Arr);
-    const num2 = getReverseNum(l2Arr);
-
-    const answerArr = (num1 + num2).toString().split('').map(BigInt).reverse();
-
-    // ListNodeへ変換
-    const nodelistArr = [];
-    answerArr.forEach((v) => {
-        nodelistArr.push(new ListNode(v, undefined))
-    });
-
-    const listnode = nodelistArr[0];
-    let target = listnode;
-    nodelistArr.forEach((nl, i) => {
-        if (i === 0) {
-            return;
-        }
-        target.next = nl;
-        target = target.next;
-    });
-
-    return listnode;
+    return dummy.next;
 };
 // @lc code=end
+
+const a = addTwoNumbers(new ListNode(2, new ListNode(4, new ListNode(3))),new ListNode(5, new ListNode(6, new ListNode(4))))
+console.log(a);
