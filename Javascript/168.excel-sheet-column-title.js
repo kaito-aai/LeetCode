@@ -14,16 +14,11 @@ var convertToTitle = function(columnNumber) {
     let result = "";
     while (columnNumber > 0) {
         columnNumber--;
-        result += alphabet[columnNumber % alphabet.length];
+        result = alphabet[columnNumber % alphabet.length] + result;
         columnNumber = Math.trunc(columnNumber / alphabet.length);
     }
 
-    return result.split('').reverse().join('');
+    return result;
 };
 
 // @lc code=end
-
-const a = convertToTitle(52)
-// 2147483647
-// FXSHRXW
-console.log(a);
