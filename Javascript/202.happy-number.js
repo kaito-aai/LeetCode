@@ -10,21 +10,15 @@
  * @return {boolean}
  */
 var isHappy = function(n) {
-    const calculated = [];
+    const calculated = new Set();
 
-    const check = (n) => {
-        if (calculated.find(v => v === n)) {
-            return false;
-        }
-        const digits = n.toString().split('').map((v) => Number(v));
-        const result = digits.reduce((p, c) => p + c ** 2, 0);
-        calculated.push(n);
-        if (result === 1) {
+    while (!calculated.has(n)) {
+        calculated.add(n);
+        n = n.toString().split('').map((v) => Number(v)).reduce((p, c) => p + c ** 2, 0);
+        if (n === 1) {
             return true;
         }
-        return check(result);
     }
-
-    return check(n);
+    return false;
 };
 // @lc code=end
