@@ -23,29 +23,26 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 var removeElements = function(head, val) {
-    const node = new ListNode();
-    let nodeCurrent = node;
-    let checkCurrent = head;
-
-    while (checkCurrent !== null) {
-        if (checkCurrent.val !== val) {
-            nodeCurrent.next = new ListNode(checkCurrent.val);
-            nodeCurrent = nodeCurrent.next;
+    let beforeNode = null;
+    let currentNode = head;
+    while (currentNode !== null) {
+        if (currentNode.val !== val) {
+            beforeNode = currentNode
+            currentNode = currentNode.next;
+            continue;
         }
 
-        checkCurrent = checkCurrent.next;
+        if (beforeNode === null) {
+            head = currentNode.next;
+            currentNode = currentNode.next;
+            continue;
+        }
+
+        beforeNode.next = currentNode.next;
+        currentNode = currentNode.next;
+        continue;
     }
 
-    return node.next;
+    return head;
 };
 // @lc code=end
-
-removeElements(
-    new ListNode(1,
-        new ListNode(2,
-            new ListNode(6,
-                new ListNode(3,
-                    new ListNode(4,
-                        new ListNode(5,
-                            new ListNode(6))))))),
-    6)
