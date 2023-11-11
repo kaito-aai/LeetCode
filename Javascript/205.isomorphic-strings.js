@@ -12,26 +12,24 @@
  */
 var isIsomorphic = function(s, t) {
     const sMap = new Map();
-    let sDigits = "";
-    for (i = 0; i < s.length; i++) {
-        if (sMap.has(s[i])) {
-            sDigits += sMap.get(s[i]);
-        }
-        sDigits += i;
-        sMap.set(s[i], i);
-    }
-
     const tMap = new Map();
-    let tDigits = "";
-    for (i = 0; i < t.length; i++) {
-        if (tMap.has(t[i])) {
-            tDigits += tMap.get(t[i]);
+    for (i = 0; i < s.length; i++) {
+        const st = sMap.get(s[i]);
+        const ts = tMap.get(t[i]);
+        if (st === undefined && ts === undefined) {
+            sMap.set(s[i], t[i]);
+            tMap.set(t[i], s[i]);
+            continue;
         }
-        tDigits += i;
-        tMap.set(t[i], i);
+
+        if (st === t[i] && ts === s[i]) {
+            continue;
+        }
+
+        return false;
     }
 
-    return sDigits === tDigits;
+    return true;
 };
 // @lc code=end
 
