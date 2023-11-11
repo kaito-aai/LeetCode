@@ -22,19 +22,19 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 var reverseList = function(head) {
-    let node = head;
-    const arr = [];
-    while (node !== null) {
-        arr.push(node.val);
-        node = node.next;
+    let prev = null;
+    let current = head;
+    let next = null;
+
+    while (current !== null) {
+        next = current.next;
+
+        current.next = prev;
+        prev = current;
+
+        current = next;
     }
 
-    const reversed = new ListNode();
-    let current = reversed;
-    for (i = arr.length - 1; i >= 0; i--) {
-        current.next = new ListNode(arr[i]);
-        current = current.next;
-    }
-    return reversed.next;
+    return prev;
 };
 // @lc code=end
