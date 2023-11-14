@@ -13,38 +13,35 @@ var summaryRanges = function(nums) {
     const result = [];
 
     let stack = [];
+    let s = [];
     while (nums.length > 0) {
-        const n = nums.shift();
-        if (stack.length === 0) {
-            stack.push(n);
+        if (s.length === 0) {
+            s.push(nums.shift());
             continue;
         }
-        if (stack[stack.length - 1] + 1 === n) {
-            stack.push(n);
+        if (s[s.length - 1] + 1 === nums[0]) {
+            s.push(nums.shift());
             continue;
         }
 
-        if (stack.length === 1) {
-            result.push(`${stack[0]}`);
+        stack.push(s);
+        s = [];
+    }
+
+    if (s.length > 0) {
+        stack.push(s);
+    }
+
+    for (i = 0; i < stack.length; i++) {
+        if (stack[i].length === 1) {
+            result.push(`${stack[i][0]}`);
         } else {
-            result.push(`${stack[0]}->${stack[stack.length - 1]}`);
+            result.push(`${stack[i][0]}->${stack[i][stack[i].length - 1]}`);
         }
-
-        stack = [n];
-    }
-
-    if (stack.length === 0) {
-        return result;
-    }
-
-    if (stack.length === 1) {
-        result.push(`${stack[0]}`);
-    } else {
-        result.push(`${stack[0]}->${stack[stack.length - 1]}`);
     }
 
     return result;
 };
 // @lc code=end
 
-summaryRanges([0,2,3,4,6,8,9]);
+summaryRanges([0,1,2,4,5,7])
