@@ -24,19 +24,27 @@ function TreeNode(val, left, right) {
  * @return {number}
  */
 var countNodes = function(root) {
-    let c = 0;
-    const count = (node) => {
-        if (node === null) {
-            return;
-        }
-
-        c++;
-        count(node.left);
-        count(node.right);
+    const getLeftDepth = (node) => {
+        if (!node) return 0;
+        return getLeftDepth(node.left) + 1;
     }
 
-    count(root);
-    return c;
+    const getRightDepth = (node) => {
+        if (!node) return 0;
+        return getRightDepth(node.right) + 1;
+    }
+
+    const traverse = (node) => {
+        const leftDepth = getLeftDepth(node);
+        const rightDepth = getRightDepth(node);
+
+        if (leftDepth === rightDepth) {
+            return Math.pow(2, leftDepth) - 1
+        }
+
+        return traverse(node.left) + traverse(node.right) + 1;
+    }
+
+    return traverse(root)
 };
 // @lc code=end
-
