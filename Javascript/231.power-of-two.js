@@ -10,19 +10,8 @@
  * @return {boolean}
  */
 var isPowerOfTwo = function(n) {
-    while(n > 0) {
-        if (n === 1) {
-            return true;
-        }
-        const mod = n % 2;
-        if (mod !== 0) {
-            return false;
-        }
-
-        n /= 2;
-    }
-    return false;
+    return Number.isInteger(Math.log2(n));
 };
 // @lc code=end
 
-isPowerOfTwo(16);
+isPowerOfTwo(12);
