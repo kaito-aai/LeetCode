@@ -29,15 +29,12 @@ var isPalindrome = function(head) {
         current = current.next;
     }
 
-    let firstHalf = null;
-    if (stack.length % 2 === 0) {
-        firstHalf = stack.splice(0, stack.length / 2);
-    } else {
-        firstHalf = stack.splice(0, (stack.length - 1) / 2);
-        stack.shift();
+    for (i = 0; i < stack.length / 2; i++) {
+        if (stack[i] !== stack[stack.length - i - 1]) {
+            return false;
+        }
     }
-    stack.reverse();
 
-    return firstHalf.every((v, i) => v === stack[i]);
+    return true;
 };
 // @lc code=end
