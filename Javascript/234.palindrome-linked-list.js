@@ -23,10 +23,9 @@ function ListNode(val, next) {
  */
 var isPalindrome = function(head) {
     const stack = [];
-    let current = head;
-    while (current !== null) {
-        stack.push(current.val);
-        current = current.next;
+    while (head !== null) {
+        stack.push(head.val);
+        head = head.next;
     }
 
     for (i = 0; i < stack.length / 2; i++) {
