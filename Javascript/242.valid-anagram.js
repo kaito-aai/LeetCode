@@ -11,9 +11,24 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    s = s.split('').sort().join();
-    t = t.split('').sort().join();
-    return t === s;
+    if (s.length !== t.length) {
+        return false;
+    }
+
+    const counter = Array.from({length: 26}, (v, k) => 0);
+    const aCode = 'a'.charCodeAt(0);
+    for (i = 0; i < s.length; i++) {
+        counter[s[i].charCodeAt(0) - aCode]++;
+        counter[t[i].charCodeAt(0) - aCode]--;
+    }
+
+    for (i = 0; i < counter.length; i++) {
+        if (counter[i] !== 0) {
+            return false;
+        }
+    }
+
+    return true;
 };
 // @lc code=end
 
