@@ -10,13 +10,8 @@
  * @return {number}
  */
 var missingNumber = function(nums) {
-    const a = new Array(nums.length + 1).fill(false);
-
-    for (i = 0; i < nums.length; i++) {
-        a[nums[i]] = true;
-    }
-
-    return a.findIndex(v => !v);
+    const expected = nums.length * (nums.length + 1) / 2;
+    const actual = nums.reduce((p, c) => p + c);
+    return expected - actual;
 };
 // @lc code=end
-
