@@ -10,10 +10,6 @@
  * @return {number}
  */
 var addDigits = function(num) {
-    while(num > 9) {
-        num = num.toString().split('').map(v => Number(v)).reduce((p,c) => p + c);
-    }
-    return num;
+    return 1 + (num - 1) % 9;
 };
 // @lc code=end
-
