@@ -15,11 +15,10 @@ var isAnagram = function(s, t) {
         return false;
     }
 
-    const counter = Array.from({length: 26}, (v, k) => 0);
-    const aCode = 'a'.charCodeAt(0);
+    const counter = new Array(26).fill(0);
     for (i = 0; i < s.length; i++) {
-        counter[s[i].charCodeAt(0) - aCode]++;
-        counter[t[i].charCodeAt(0) - aCode]--;
+        counter[s[i].charCodeAt(0) - 97]++;
+        counter[t[i].charCodeAt(0) - 97]--;
     }
 
     for (i = 0; i < counter.length; i++) {
