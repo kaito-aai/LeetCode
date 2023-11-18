@@ -32,19 +32,19 @@ var binaryTreePaths = function(root) {
      * @returns 
      */
     const findPaths = (path, node) => {
-        path += `${node.val}->`
-        if (node.left === null && node.right === null) {
-            paths.push(path.substring(0, path.length - 2));
+        if (!node) {
             return;
         }
 
-        if (node.left !== null) {
-            findPaths(path, node.left);
+        path += `${node.val}`
+        if (!node.left && !node.right) {
+            paths.push(path);
+            return;
         }
+        path += '->';
 
-        if (node.right !== null) {
-            findPaths(path, node.right);
-        }
+        findPaths(path, node.left);
+        findPaths(path, node.right);
     }
 
     findPaths("", root);
