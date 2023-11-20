@@ -11,20 +11,18 @@
  */
 var moveZeroes = function(nums) {
     let index = 0;
-    const zeroStack = [];
-    while (index < nums.length) {
-        if (nums[index] === 0) {
-            zeroStack.push(nums.splice(index, 1));
+    let zeroStartIndex = nums.length;
+    while (zeroStartIndex >= index) {
+        if (nums[index] !== 0) {
+            index++;
             continue;
         }
-        index++;
-    }
-    
-    while (zeroStack.length > 0) {
-        nums.push(zeroStack.shift());
+
+        zeroStartIndex--;
+        const zero = nums.splice(index, 1);
+        nums.push(zero);
     }
 
     return nums;
 };
 // @lc code=end
-
