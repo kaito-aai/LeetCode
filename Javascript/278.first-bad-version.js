@@ -16,16 +16,6 @@
  */
 
 /**
- * @param {integer} version number
- * @return {boolean} whether the version is bad
- */
-var isBadVersion = function(version) {
-    if (version >= 4) {
-        return true;
-    }
-};
-
-/**
  * @param {function} isBadVersion()
  * @return {function}
  */
@@ -37,34 +27,18 @@ var solution = function(isBadVersion) {
     return function(n) {
         let rangeHead = 1;
         let rangeTail = n;
-        let firstBad = n;
-        const checked = new Set();
 
         while (rangeHead < rangeTail) {
-            const numsCount = rangeTail - rangeHead + 1;
-            const center = Math.trunc(((rangeHead + rangeTail) * numsCount / 2) / numsCount);
+            const center = Math.floor(rangeHead + (rangeTail - rangeHead) / 2);
 
-            if (checked.has(center)) {
-                return firstBad;
-            }
-
-            if (!isBadVersion(center)) {
-                rangeHead = center;
-                checked.add(center);
-                continue;
-            }
-
-            if (center < firstBad) {
-                firstBad = center;
+            if (isBadVersion(center)) {
                 rangeTail = center;
-                checked.add(center);
-                continue;
+            } else {
+                rangeHead = center + 1;
             }
-
-            return firstBad;
         }
 
-        return firstBad;
+        return rangeHead;
     };
 };
 // @lc code=end
