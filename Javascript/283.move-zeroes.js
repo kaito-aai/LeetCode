@@ -10,17 +10,14 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function(nums) {
-    let index = 0;
-    let zeroStartIndex = nums.length;
-    while (zeroStartIndex >= index) {
-        if (nums[index] !== 0) {
-            index++;
-            continue;
+    let nonZeroIndex = 0;
+    for (i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {
+            const temp = nums[nonZeroIndex];
+            nums[nonZeroIndex] = nums[i];
+            nums[i] = temp;
+            nonZeroIndex++;
         }
-
-        zeroStartIndex--;
-        const zero = nums.splice(index, 1);
-        nums.push(zero);
     }
 
     return nums;
