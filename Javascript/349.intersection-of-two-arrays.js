@@ -11,22 +11,19 @@
  * @return {number[]}
  */
 var intersection = function(nums1, nums2) {
-    const checked = new Set();
+    const set1 = new Set(nums1);
+    const set2 = new Set(nums2);
+
+    const [smallSet, largeSet] = set1.size > set2.size ? [set2, set1] : [set1, set2];
     const result = [];
-    for (i = 0; i < nums1.length; i++) {
-        for (j = 0; j < nums2.length; j++) {
-            if (checked.has(nums1[i])) {
-                break;
-            }
-            if (nums1[i] === nums2[j]) {
-                result.push(nums1[i]);
-                checked.add(nums1[i]);
-                break;
-            }
+
+    smallSet.forEach((v) => {
+        if (largeSet.has(v)) {
+            result.push(v);
         }
-        checked.add(nums1[i]);
-    }
+    })
 
     return result;
 };
 // @lc code=end
+intersection([1,2,2,1], [2,2]);
