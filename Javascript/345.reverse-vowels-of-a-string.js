@@ -10,18 +10,21 @@
  * @return {string}
  */
 var reverseVowels = function(s) {
-    const set = new Set("aeiou");
-
-    const stack = [];
-    for (i = 0; i < s.length; i++) {
-        if (set.has(s[i].toLowerCase())) {
-            stack.push(i);
-        }
-    }
-
+    const set = new Set("aeiouAEIOU");
     const chars = s.split('');
-    for (i = 0; i < stack.length / 2; i++) {
-        [chars[stack[i]], chars[stack[stack.length - i - 1]]] = [chars[stack[stack.length - i - 1]], chars[stack[i]]];
+
+    let i = 0;
+    let j = s.length - 1;
+    while (i < j) {
+        if (set.has(chars[i]) && set.has(chars[j])) {
+            [chars[i], chars[j]] = [chars[j], chars[i]];
+            i++;
+            j--;
+        } else if (set.has(chars[i])) {
+            j--;
+        } else {
+            i++;
+        }
     }
 
     return chars.join('');
