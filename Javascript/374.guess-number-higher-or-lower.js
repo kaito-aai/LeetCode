@@ -32,26 +32,22 @@
 var guessNumber = function(n) {
     let largeNearest = n;
     let smallNearest = 1;
-    let c = 1;
-    let guessed = n;
-    while (c !== 0) {
-        c = guess(guessed);
+    while (smallNearest < largeNearest) {
+        let guessed = Math.trunc((largeNearest + smallNearest) / 2);
+        let c = guess(guessed);
+        if (c === 0) {
+            return guessed;
+        }
+
         if (c === 1) {
-            if (smallNearest < guessed) {
-                smallNearest = guessed;
-            }
-            guessed = Math.trunc((largeNearest + smallNearest) / 2);
+            smallNearest = guessed + 1;
         }
 
         if (c === -1) {
-            if (largeNearest > guessed) {
-                largeNearest = guessed;
-            }
-
-            guessed = Math.trunc((largeNearest + smallNearest) / 2);
+            largeNearest = guessed - 1;
         }
     }
-    return guessed;
+    return smallNearest;
 };
 // @lc code=end
 
