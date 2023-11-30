@@ -11,14 +11,13 @@
  * @return {character}
  */
 var findTheDifference = function(s, t) {
-    const arr = new Array(26).fill(0);
-    const acode = 'a'.charCodeAt(0);
+    let codeSum = 0;
     for (i = 0; i < s.length; i++) {
-        arr[s[i].charCodeAt(0) - acode]--;
-        arr[t[i].charCodeAt(0) - acode]++;
+        codeSum -= s[i].charCodeAt(0);
+        codeSum += t[i].charCodeAt(0);
     }
-    arr[t[t.length - 1].charCodeAt(0) - acode]++;
+    codeSum += t[t.length - 1].charCodeAt(0);
 
-    return String.fromCharCode([arr.findIndex(v => v === 1) + acode]);
+    return String.fromCharCode(codeSum);
 };
 // @lc code=end
