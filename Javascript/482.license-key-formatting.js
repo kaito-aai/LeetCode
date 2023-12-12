@@ -11,12 +11,7 @@
  * @return {string}
  */
 var licenseKeyFormatting = function(s, k) {
-    for (i = 0; i < s.length; i++) {
-        if (s[i] === '-') {
-            s = s.substring(0, i) + s.substring(i + 1);
-            i--;
-        }
-    }
+    s = s.replace(/-/g, "");
 
     let end = s.length;
     let ans = "";
