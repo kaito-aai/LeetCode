@@ -23,35 +23,25 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 var removeNthFromEnd = function(head, n) {
-    const getFlattenNode = (node, arr) => {
-        if (!node) {
-            return arr;
-        }
+    let fast = head;
+    let slow = head;
 
-        arr.push(node);
-        return getFlattenNode(node.next, arr);
+    for (let i = 0; i < n; i++) {
+        fast = fast.next;
     }
 
-    const flatten = getFlattenNode(head, []);
-    const nodeBeforeTarget = flatten[flatten.length - 1 - n];
-    const nodeAfterTarget = flatten[flatten.length - 1 - n + 2];
-    if (nodeBeforeTarget && nodeAfterTarget) {
-        nodeBeforeTarget.next = nodeAfterTarget;
-        return head;
+    if (!fast) {
+        return head.next;
     }
-    if (!nodeBeforeTarget && !nodeAfterTarget) {
-        head = null;
-        return head;
+
+    while (fast.next) {
+        fast = fast.next;
+        slow = slow.next;
     }
-    if (!nodeBeforeTarget) {
-        head = nodeAfterTarget;
-        return head;
-    }
-    if (!nodeAfterTarget) {
-        nodeBeforeTarget.next = null;
-        return head;
-    }
+
+    slow.next = slow.next.next;
+    return head;
 };
 // @lc code=end
 
-removeNthFromEnd(new ListNode(1, new ListNode(2)), 2);
+removeNthFromEnd(new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5))))), 2);
