@@ -10,25 +10,31 @@
  * @return {string[]}
  */
 var generateParenthesis = function(n) {
-    const patterns = [];
+    const parentheses = [];
     /**
      * 
-     * @param {number} count 
-     * @param {string} parentheses 
+     * @param {string} str 
+     * @param {number} open 
+     * @param {number} close 
      */
-    const insert = (count, parentheses) => {
-        if (count === n) {
-            patterns.push(parentheses);
+    const insert = (str, open, close) => {
+        if (open > close) {
             return;
-        } else {
-            for (let i = 0; i < parentheses.length; i++) {
-                insert(count+1, parentheses.slice(0, i) + "()" + parentheses.slice(i));
-            }
+        }
+        if (open === 0 && close === 0) {
+            parentheses.push(str);
+            return;
+        }
+        if (open > 0) {
+            insert(`${str}(`, open - 1, close);
+        }
+        if (close > 0) {
+            insert(`${str})`, open, close - 1);
         }
     }
 
-    insert(1, "()");
-    return Array.from(new Set(patterns));
+    insert('', n, n);
+    return parentheses;
 };
 // @lc code=end
 generateParenthesis(3);
