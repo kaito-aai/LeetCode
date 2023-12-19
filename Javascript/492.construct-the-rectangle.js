@@ -10,24 +10,13 @@
  * @return {number[]}
  */
 var constructRectangle = function(area) {
-    let L = area - 1;
-    let W = 1;
-    let ans = [area, 1];
-    while (L >= W) {
-        if (area % L !== 0) {
-            L--;
-            continue;
-        }
+    let sqrt = Math.trunc(Math.sqrt(area));
 
-        W = area / L;
-
-        if (Math.abs(ans[0] - ans[1]) > Math.abs(L - W)) {
-            ans = [L, W];
-        }
-        L--;
+    while (area % sqrt !== 0) {
+        sqrt--;
     }
 
-    return ans;
+    return [area / sqrt, sqrt];
 };
 // @lc code=end
 
