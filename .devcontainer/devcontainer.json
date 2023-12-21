@@ -1,11 +1,7 @@
 {
 	"name": "Leet Code",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
-	"appPort": ["3000:3000"],
+	"dockerFile": "Dockerfile",
 	"customizations": {
 		"vscode": { "extensions": ["esbenp.prettier-vscode", "eamodio.gitlens", "LeetCode.vscode-leetcode"] }
-	},
-	"containerEnv": {
-		"TZ": "Asia/Tokyo"
 	}
 }
