@@ -2,6 +2,14 @@
 	"name": "Leet Code",
 	"dockerFile": "Dockerfile",
 	"customizations": {
-		"vscode": { "extensions": ["esbenp.prettier-vscode", "eamodio.gitlens", "LeetCode.vscode-leetcode"] }
+		"vscode": { "extensions": [
+				"esbenp.prettier-vscode",
+				"eamodio.gitlens",
+				"LeetCode.vscode-leetcode",
+				"Shopify.ruby-lsp"
+			] }
+	},
+	"containerEnv": {
+		"TZ": "Asia/Tokyo"
 	}
 }
