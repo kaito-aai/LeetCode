@@ -12,16 +12,21 @@
  */
 var nextGreaterElement = function(nums1, nums2) {
     const ans = [];
-    for (let i = 0; i < nums1.length; i++) {
-        const pos = nums2.findIndex(v => v === nums1[i]);
-        const sliced = nums2.slice(pos+1);
-        const found = sliced.find(v => v > nums2[pos]);
-        if (found) {
-            ans.push(found);
-        } else {
-            ans.push(-1);
+    const map = {};
+
+    for (let l = 0; l < nums2.length; l++) {
+        let r = l + 1;
+        while (r <= nums2.length - 1 && nums2[l] > nums2[r]) {
+            r++;
         }
+
+        map[nums2[l]] = r < nums2.length ? nums2[r] : -1
     }
+
+    for (let i = 0; i < nums1.length; i++) {
+        ans.push(map[nums1[i]])
+    }
+
     return ans;
 };
 // @lc code=end
