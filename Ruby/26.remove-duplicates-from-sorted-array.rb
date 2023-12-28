@@ -8,18 +8,19 @@
 # @param {Integer[]} nums
 # @return {Integer}
 def remove_duplicates(nums)
-    counted = nil
-    i = 0
-    while i < nums.size
-        if counted == nums[i]
-            nums.delete_at(i)
+    map = {}
+    length = nums.size
+
+    0.upto(length - 1) do |i|
+        if map[nums[i]]
+            nums[i] = nil
         else
-            counted = nums[i]
-            i += 1
+            map[nums[i]] = nums[i]
         end
     end
 
-    return nums.size
+    nums.compact!
+    nums.size
 end
 # @lc code=end
 
