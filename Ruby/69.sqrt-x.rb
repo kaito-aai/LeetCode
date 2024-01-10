@@ -8,12 +8,26 @@
 # @param {Integer} x
 # @return {Integer}
 def my_sqrt(x)
-    return 0 if x == 0
-    return 1 if x == 1
+    return x if x < 2
 
-    for i in 0...x
-        return i if (i * i) <= x && x < ((i + 1) * (i + 1))
+    left = 2
+    right = x / 2
+
+    while left <= right
+        mid = (left + right) / 2
+
+        square = mid * mid
+
+        if square == x
+            return mid
+        elsif square > x
+            right = mid - 1
+        else
+            left = mid + 1
+        end
     end
+
+    return right
 end
 # @lc code=end
 
