@@ -22,7 +22,6 @@ var convertToBase7 = function(num) {
         result = `${num % 7}${result}`
         num = Math.floor(num / 7);
     }
-    result = sign >= 0 ? `${result}` : `-${result}`;
-    return result
+    return sign >= 0 ? `${result}` : `-${result}`;
 };
 // @lc code=end
