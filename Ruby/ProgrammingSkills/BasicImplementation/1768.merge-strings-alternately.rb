@@ -4,14 +4,12 @@
 def merge_alternately(word1, word2)
     str = ""
 
-    while word1.size > 0 || word2.size > 0
-        str = str + word1.slice!(0) if word1.size > 0
-
-        str = str + word2.slice!(0) if word2.size > 0
+    while !word1.empty? && !word2.empty?
+        str += word1.slice!(0) + word2.slice!(0)
     end
 
-    str
+    str + word1 + word2
 end
 
-a = merge_alternately "aaa", "bbb"
+a = merge_alternately "ab", "pqrs"
 print a
